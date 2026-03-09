@@ -26,7 +26,6 @@ const RSVPSection = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitted(true);
-    // In a real scenario, this would send data to a backend
   };
 
   if (submitted) {
@@ -54,7 +53,7 @@ const RSVPSection = () => {
         <div className="wedding-container text-center">
           <h2 className="section-title mb-4">Confirmação de Presença</h2>
           <p className="section-subtitle mb-10">
-            Por favor, confirme até 30 de junho de 2026
+            Por favor, confirme até 25 de maio de 2026
           </p>
 
           <form onSubmit={handleSubmit} className="bg-card rounded-sm p-8 md:p-12 border border-border max-w-2xl mx-auto text-left">
