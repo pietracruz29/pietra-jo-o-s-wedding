@@ -8,8 +8,8 @@ interface Child {
 
 const RSVPSection = () => {
   const [name, setName] = useState("");
-  const [companion, setCompanion] = useState("");
-  const [hasCompanion, setHasCompanion] = useState(false);
+  const [partnerName, setPartnerName] = useState("");
+  const [hasPartner, setHasPartner] = useState(false);
   const [hasChildren, setHasChildren] = useState(false);
   const [children, setChildren] = useState<Child[]>([{ name: "", age: "" }]);
   const [attending, setAttending] = useState<"yes" | "no" | null>(null);
@@ -105,24 +105,24 @@ const RSVPSection = () => {
 
             {attending === "yes" && (
               <>
-                {/* Companion */}
+                {/* Partner */}
                 <div className="mb-6">
                   <label className="flex items-center gap-3 cursor-pointer">
                     <input
                       type="checkbox"
-                      checked={hasCompanion}
-                      onChange={(e) => setHasCompanion(e.target.checked)}
+                      checked={hasPartner}
+                      onChange={(e) => setHasPartner(e.target.checked)}
                       className="w-4 h-4 accent-primary"
                     />
-                    <span className="text-sm text-foreground/80 font-light">Terei um(a) acompanhante</span>
+                    <span className="text-sm text-foreground/80 font-light">Irei com meu parceiro(a)</span>
                   </label>
-                  {hasCompanion && (
+                  {hasPartner && (
                     <input
                       type="text"
-                      value={companion}
-                      onChange={(e) => setCompanion(e.target.value)}
+                      value={partnerName}
+                      onChange={(e) => setPartnerName(e.target.value)}
                       className="w-full mt-3 px-4 py-3 bg-background border border-border rounded-sm text-foreground font-light focus:outline-none focus:ring-1 focus:ring-primary"
-                      placeholder="Nome do(a) acompanhante"
+                      placeholder="Nome completo do(a) parceiro(a)"
                     />
                   )}
                 </div>
@@ -151,7 +151,7 @@ const RSVPSection = () => {
                               placeholder="Nome da criança"
                             />
                           </div>
-                          <div className="w-24">
+                          <div className="w-28">
                             <input
                               type="text"
                               value={child.age}
