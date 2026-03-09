@@ -6,7 +6,8 @@ const CeremonySection = () => {
       <PalmDivider />
       <section id="cerimonia" className="py-16 bg-background">
         <div className="wedding-container text-center">
-          <h2 className="section-title mb-10">Localização</h2>
+          <h2 className="section-title mb-2">Localização</h2>
+          <p className="section-subtitle mb-10">Cerimônia e Recepção</p>
 
           <div className="bg-card rounded-sm p-8 md:p-12 border border-border max-w-2xl mx-auto">
             <h3 className="text-2xl md:text-3xl font-light text-primary mb-2" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
