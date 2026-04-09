@@ -14,7 +14,7 @@ const DressCodeSection = () => {
             <img
               src={dressCodeImg}
               alt="Referência de trajes - Esporte Fino"
-              className="w-full h-auto mb-8"
+              className="w-full max-w-lg mx-auto h-auto mb-8"
             />
 
             <div className="bg-card rounded-sm p-8 border border-border">
