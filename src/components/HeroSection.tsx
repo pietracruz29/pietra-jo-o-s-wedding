@@ -5,28 +5,28 @@ import CountdownSection from "./CountdownSection";
 
 const HeroSection = () => {
   return (
-    <section id="topo" className="relative min-h-screen flex flex-col items-center bg-cream-light overflow-hidden">
-      {/* Aquarela as background layer */}
-      <div className="absolute inset-0 flex items-end justify-center pointer-events-none">
+    <section id="topo" className="relative flex flex-col items-center bg-cream-light overflow-hidden">
+      {/* Aquarela at the top */}
+      <div className="relative w-full flex justify-center">
         <img
           src={aquarela}
           alt=""
-          className="w-full max-w-5xl h-auto opacity-60"
+          className="w-full max-w-5xl h-auto opacity-70"
           aria-hidden="true"
         />
-        {/* Top fade */}
-        <div className="absolute top-0 left-0 right-0 h-40 bg-gradient-to-b from-cream-light to-transparent" />
-        {/* Bottom fade */}
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-cream-light to-transparent" />
+        {/* Bottom fade into content */}
+        <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-cream-light to-transparent" />
         {/* Side fades */}
         <div className="absolute top-0 bottom-0 left-0 w-24 bg-gradient-to-r from-cream-light to-transparent" />
         <div className="absolute top-0 bottom-0 right-0 w-24 bg-gradient-to-l from-cream-light to-transparent" />
+        {/* Top fade */}
+        <div className="absolute top-0 left-0 right-0 h-20 bg-gradient-to-b from-cream-light to-transparent" />
       </div>
 
-      {/* Content on top */}
-      <div className="relative z-10 flex flex-col items-center w-full">
+      {/* Content below aquarela */}
+      <div className="relative z-10 flex flex-col items-center w-full -mt-20">
         {/* Monogram */}
-        <div className="pt-24 pb-6">
+        <div className="pb-6">
           <img src={monogram} alt="J&P" className="h-24 md:h-32 w-auto mx-auto drop-shadow-sm" />
         </div>
 
@@ -50,8 +50,8 @@ const HeroSection = () => {
           <CountdownSection />
         </div>
 
-        {/* Spacer to push content up and let aquarela show below */}
-        <div className="h-[30vh]" />
+        {/* Spacer */}
+        <div className="h-16" />
       </div>
     </section>
   );
