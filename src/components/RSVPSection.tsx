@@ -37,12 +37,12 @@ const RSVPSection = () => {
         : [];
 
       // Save to database
-      const { error } = await supabase.from("rsvps").insert({
+      const { error } = await supabase.from("rsvps").insert([{
         name: name.trim(),
         attending: isAttending,
         partner_name: hasPartner && isAttending ? partnerName.trim() || null : null,
-        children: childrenData,
-      });
+        children: childrenData as any,
+      }]);
 
       if (error) throw error;
 
