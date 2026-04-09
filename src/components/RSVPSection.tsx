@@ -1,5 +1,7 @@
 import { useState } from "react";
 import PalmDivider from "./PalmDivider";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "@/hooks/use-toast";
 
 interface Child {
   name: string;
@@ -14,6 +16,7 @@ const RSVPSection = () => {
   const [children, setChildren] = useState<Child[]>([{ name: "", age: "" }]);
   const [attending, setAttending] = useState<"yes" | "no" | null>(null);
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const addChild = () => setChildren([...children, { name: "", age: "" }]);
   const removeChild = (i: number) => setChildren(children.filter((_, idx) => idx !== i));
@@ -23,9 +26,47 @@ const RSVPSection = () => {
     setChildren(updated);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setLoading(true);
+
+    try {
+      const isAttending = attending === "yes";
+      const childrenData = hasChildren && isAttending
+        ? children.filter(c => c.name.trim())
+        : [];
+
+      // Save to database
+      const { error } = await supabase.from("rsvps").insert([{
+        name: name.trim(),
+        attending: isAttending,
+        partner_name: hasPartner && isAttending ? partnerName.trim() || null : null,
+        children: childrenData as any,
+      }]);
+
+      if (error) throw error;
+
+      // Send email notification
+      await supabase.functions.invoke("notify-rsvp", {
+        body: {
+          name: name.trim(),
+          attending: isAttending,
+          partnerName: hasPartner && isAttending ? partnerName.trim() : null,
+          children: childrenData,
+        },
+      });
+
+      setSubmitted(true);
+    } catch (err) {
+      console.error("RSVP error:", err);
+      toast({
+        title: "Erro",
+        description: "Não foi possível enviar sua confirmação. Tente novamente.",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (submitted) {
@@ -187,10 +228,10 @@ const RSVPSection = () => {
             {/* Submit */}
             <button
               type="submit"
-              disabled={!attending || !name.trim()}
+              disabled={!attending || !name.trim() || loading}
               className="btn-wedding-filled w-full disabled:opacity-40 disabled:cursor-not-allowed"
             >
-              Enviar Confirmação
+              {loading ? "Enviando..." : "Enviar Confirmação"}
             </button>
           </form>
         </div>
