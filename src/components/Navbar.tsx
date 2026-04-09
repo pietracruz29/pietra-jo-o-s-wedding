@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import monogram from "@/assets/monogram.png";
 
 const navItems = [
-  { label: "Cerimônia", href: "#cerimonia" },
+  { label: "Localização", href: "#cerimonia" },
   { label: "Traje", href: "#traje" },
   { label: "Presentes", href: "#presentes" },
   { label: "Confirmação", href: "#confirmacao" },
